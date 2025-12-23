@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route to login page
   {
     path: 'login',
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/auth/login/login.component').then(
         (m) => m.LoginComponent
@@ -32,6 +32,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        title:'Dashboard',
         component: DashboardComponent,
         data: { roles: ['ADMIN', 'MANAGER'] },
       },

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../shared/user';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 // mock-users.ts
 export const USERS: User[] = [
   { email: 'admin1@a.com', password: 'Admin@123', role: 'ADMIN' },
@@ -14,7 +15,8 @@ export class AuthService {
   private isAuthenticated: Subject<boolean> = new Subject<boolean>();
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
-  constructor() {
+  userEmail: any;
+  constructor(private http:HttpClient) {
     const storedUser = localStorage.getItem('auth');
     this.currentUserSubject = new BehaviorSubject<User | null>(
       storedUser ? JSON.parse(storedUser) : null
@@ -39,7 +41,7 @@ export class AuthService {
       const authData = {
         token: 'jwt-token',
         role: found.role, // ADMIN, MANAGER, VIEWER
-        eamil: found.email,
+        email: found.email,
         password: found.password,
       };
       localStorage.setItem('auth', JSON.stringify(authData));
@@ -63,6 +65,8 @@ export class AuthService {
     // Simulate logging out
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('token');
+    localStorage.removeItem('auth')
+    localStorage.removeItem('Bearer Token')
   }
 
   getUserRole(): any {
@@ -72,8 +76,27 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth');
   }
-
+  getUserEmail(){
+   this.currentUserSubject.subscribe(value=> {
+    this.userEmail = value?.email
+  })
+  }
+ getUser(): Promise<User> {
+  let user:any = USERS.filter(user=>user.email==this.userEmail)[0]
+  //.reduce((a:any, v:any) => ({ ...a, [v]: v}), {})
+  //Object.assign({}, USERS.filter(user=>user.email==this.userEmail))
+    return Promise.resolve({
+    email:user.email,
+    password:user.password,
+    role:user.role
+  });
+    //fetch('/api/user').then(res => res.json());
+  }
   setUser(user: User) {
     this.currentUserSubject.next(user);
+  }
+
+  getuserdata(){
+    return this.http.get('https://jsonplaceholder.typicode.com/users')
   }
 }
