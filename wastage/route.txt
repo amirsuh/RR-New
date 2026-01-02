@@ -1,0 +1,96 @@
+import { Routes } from '@angular/router';
+import { authGuard } from './core/auth.guard';
+import { DashboardComponent } from './pages/main/dashboard/dashboard.component';
+import { StockandreportComponent } from './pages/main/stockandreport/stockandreport.component';
+import { AnalyticsComponent } from './pages/main/analytics/analytics.component';
+import { UserListComponent } from './pages/main/user-list/user-list.component';
+import { MessagesComponent } from './pages/main/messages/messages.component';
+import { SettingsComponent } from './pages/main/settings/settings.component';
+import { InwardOutwardComponent } from './pages/main/inward-outward/inward-outward.component';
+import { roleGuard } from './core/guards/role.guard';
+import { UnauthorisedComponent } from './pages/unauthorised/unauthorised.component';
+import { ROLES, ROUTESCONSTANT } from './shared/contants/route.constants';
+
+export const routes: Routes = [
+  { path: '', redirectTo: '/'+ROUTESCONSTANT.LOGIN, pathMatch: 'full' }, // Default route to login page
+  {
+    path: ROUTESCONSTANT.LOGIN,
+    // canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/auth/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+  },
+
+  {
+    path: ROUTESCONSTANT.LAYOUT,
+    canActivate: [authGuard,roleGuard],
+    data: { roles: [ROLES.ADMIN, ROLES.MANAGER] },
+    loadComponent: () =>
+      import(ROUTESCONSTANT.LAYOUTPATH).then(
+        (m) => m.LayoutComponent
+      ),
+    children: [
+      {
+        path: '',
+        title:ROUTESCONSTANT.DASHBOARD,
+        component: DashboardComponent,
+        data: { roles: [ROLES.ADMIN, ROLES.MANAGER] },
+      },
+      {
+        path: ROUTESCONSTANT.STOCKREPORTID,
+        canActivate: [roleGuard],
+        component: StockandreportComponent,
+        data: { roles: [ROLES.ADMIN] },
+      },
+      {
+        path: ROUTESCONSTANT.ANALYTICS,
+        component: AnalyticsComponent,
+        data: { roles: [ROLES.MANAGER] },
+      },
+      {
+        path: ROUTESCONSTANT.USERLISTS,
+        canActivate: [roleGuard],
+        component: UserListComponent,
+        data: { roles: [ROLES.ADMIN] },
+      },
+      {
+        path: ROUTESCONSTANT.MESSAGES,
+        component: MessagesComponent,
+        data: { roles: [ROLES.ADMIN, ROLES.MANAGER] },
+      },
+      {
+        path: ROUTESCONSTANT.SETTINGS,
+        component: SettingsComponent,
+        data: { roles: [ROLES.ADMIN] },
+      },
+      {
+        path: ROUTESCONSTANT.INWARDOUTWARD,
+        component: InwardOutwardComponent,
+        data: { roles: [ROLES.MANAGER] },
+      },
+      {
+        path: ROUTESCONSTANT.INWARDENTRY,
+        loadComponent: () =>
+          import(ROUTESCONSTANT.INWARDENTRYPATH).then(
+            (m) => m.InvardEntryComponent
+          ),
+        data: { roles: [ROLES.ADMIN] },
+      },
+      {
+        path: ROUTESCONSTANT.PRODUCTS,
+        loadComponent: () =>
+          import(ROUTESCONSTANT.PRODUCTSPATH).then(
+            (m) => m.ProductsComponent
+          ),
+        data: { roles: [ROLES.ADMIN, ROLES.MANAGER] },
+      },
+
+      {
+        path: ROUTESCONSTANT.UNAUTHORIZED,
+        component: UnauthorisedComponent,
+      },
+    ],
+  },
+   { path: '**', redirectTo: '/login' },
+];

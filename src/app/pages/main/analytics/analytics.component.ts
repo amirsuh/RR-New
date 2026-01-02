@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterHeaderComponent } from '../../shared/filter-header/filter-header.component';
 import { CommonModule } from '@angular/common';
+import { formConfigAnalytics } from './config';
+import { IForm } from '../../../shared/interfaces/dynamic-form/form.interface';
 
 @Component({
   selector: 'analytics',
@@ -15,6 +17,7 @@ export class AnalyticsComponent implements OnInit {
 
   headingOfPage: string = 'Welcome to Your Analytics';
   selectedItem: string = '';
+  addNewAnalytics = formConfigAnalytics as IForm;
 
   constructor() {}
   ngOnInit(): void {

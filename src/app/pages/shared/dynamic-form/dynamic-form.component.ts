@@ -77,12 +77,13 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
     if (changes['godown']) {
       this.dynamicForGrp.patchValue(this.godown);
-      if (this.godown.lastUpdated) {
+      if (this.godown && this.godown.lastUpdated) {
         const startDateObject = new Date(this.godown.lastUpdated);
         const formattedDate = this.datePipe.transform(startDateObject, 'yyyy-MM-dd');
         this.dynamicForGrp.patchValue({ lastUpdated: formattedDate });
+        this.openModal()
       }
-     this.openModal()
+
     }
   }
 
