@@ -37,31 +37,54 @@
         <select class="form-select" (change)="sort($event)">
           <option selected disabled>Sort By</option>
           @for(option of sortOpt;track option.id){
-           <option  [value]="option | json">{{ option.label }}</option>
+          <option [value]="option | json">{{ option.label }}</option>
           }
         </select>
       </div>
     </div>
 
     <!-- SEARCH BAR -->
-    <div class="col-md-3 ">
+    <div [class]="addNewGodown ? 'col-md-3' : 'col-md-2'">
       <div class="input-group">
         <i class="bi bi-arrow-left-right text-primary fs-4 hover-hand" (click)="changeLayout()"></i>
       </div>
     </div>
+
+
+    @defer (when addNewGodown) {
+    <!-- This content (and its dependencies) is lazily loaded and displayed once dataLoaded is true -->
+    <!-- @if(addNewGodown){ -->
     <div class="col-md-3">
       <div class="input-group">
-        <button class="btn btn-primary" data-bs-toggle="modal"  (click)="addnewGodownPopup()">
+        <button class="btn btn-primary" data-bs-toggle="modal" (click)="addnewGodownPopup()">
           <i class="bi bi-plus-circle me-1"></i>
           Add New
         </button>
       </div>
     </div>
+    <!-- } -->
+    }
+    @placeholder {
+    <!-- Content displayed initially, before the trigger condition is met -->
+    <div class="col-md-4">This feature doesn't contain the form logic.</div>
+    }
+    @loading (after 100ms; minimum 1s) {
+    <!-- Content displayed while the bundle for the deferred content is being fetched -->
+    <div class="loader">Loading...</div>
+    }
+    @error {
+    <!-- Content displayed if an error occurs during loading -->
+    <p>Oops! Failed to load data.</p>
+    }
+
+
+
   </div>
 </div>
 
 
 <!-- Modal -->
+
 <div class="modal fade" id="dynamicModal" tabindex="-1">
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">

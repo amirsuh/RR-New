@@ -57,8 +57,8 @@ export class FilterHeaderComponent implements OnInit,OnChanges {
   constructor(public common: CommonService) {}
 
   ngOnInit() {
-    debugger
-    console.log(this.filterName);
+
+    console.log(this.filterName,this.addNewGodown);
     this.common.layouFlag$.subscribe((flag) => {
       this.isFlag = flag;
     });

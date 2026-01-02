@@ -1,0 +1,75 @@
+{
+  "goDowns": [
+    {
+      "id": 1,
+      "name": "Turmeric Warehouse",
+      "location": "Pune, Maharashtra",
+      "description": "test",
+      "storage": 1,
+      "capacity": 10000,
+      "currentStock": 7500,
+      "inwardStock": 5000,
+      "outwardStock": 3000,
+      "lastUpdated": "2025-12-01T04:30:00.000Z",
+      "status": "active",
+      "contactPerson": "Rajesh Kumar",
+      "contactNumber": "9876543210"
+    },
+    {
+      "id": 2,
+      "name": "Spices Hub",
+      "location": "Surat, Gujarat",
+      "description": "test",
+      "storage": 1,
+      "capacity": 8000,
+      "currentStock": 5200,
+      "inwardStock": 2000,
+      "outwardStock": 1000,
+      "lastUpdated": "2025-11-28T09:00:00.000Z",
+      "status": "inactive"
+    },
+    {
+      "id": 3,
+      "name": "Herbal Goods Warehouse",
+      "location": "Hyderabad, Telangana",
+      "description": "test",
+      "storage": 1,
+      "capacity": 12000,
+      "currentStock": 9000,
+      "inwardStock": 6000,
+      "outwardStock": 4000,
+      "lastUpdated": "2025-12-02T03:15:00.000Z",
+      "status": "active",
+      "contactPerson": "Sneha Reddy",
+      "contactNumber": "9876549876"
+    },
+    {
+      "id": 4,
+      "name": "Organic Goods Warehouse",
+      "location": "Bangalore, Karnataka",
+      "description": "test",
+      "storage": 1,
+      "capacity": 15000,
+      "currentStock": 13500,
+      "inwardStock": 7000,
+      "outwardStock": 2000,
+      "lastUpdated": "2025-11-25T11:45:00.000Z",
+      "status": "inactive"
+    },
+    {
+      "id": 5,
+      "name": "Dry Goods Storage",
+      "location": "Delhi, Delhi",
+      "description": "test",
+      "storage": 1,
+      "capacity": 5000,
+      "currentStock": 3200,
+      "inwardStock": 1500,
+      "outwardStock": 600,
+      "lastUpdated": "2025-12-05T04:00:00.000Z",
+      "status": "active",
+      "contactPerson": "Amit Sharma",
+      "contactNumber": "9876554321"
+    }
+  ]
+}
