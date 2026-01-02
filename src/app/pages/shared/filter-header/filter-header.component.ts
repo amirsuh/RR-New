@@ -100,7 +100,7 @@ addnewGodownPopup(){
   }
 
   updateValue(newValue: string) {
-    debugger;
+
     this.value = newValue;
     this.changeInput.emit(newValue);
   }

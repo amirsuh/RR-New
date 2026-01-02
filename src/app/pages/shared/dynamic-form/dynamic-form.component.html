@@ -1,7 +1,8 @@
 <div class="modal-header">
-  <h5 class="modal-title">{{form.formTitle}}</h5>
+  <h5 class="modal-title">{{form ? form.formTitle : 'Default Title'}}</h5>
   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
+@if(form && form.formControls){
 <form class="row" [formGroup]="dynamicForGrp">
   <ng-container *ngFor="let control of form.formControls">
     <div *ngIf="['text','email','number','date','password'].includes(control.type)" [class]="control.class">
@@ -44,6 +45,10 @@
     <!-- </div> -->
   </div>
 </form>
+}@else{
+<p>No form configuration provided.</p>
+}
+
 
 
 <div class="toast-container position-fixed top-0 end-0 p-3">

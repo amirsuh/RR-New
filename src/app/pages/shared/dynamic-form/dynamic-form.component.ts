@@ -42,7 +42,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   constructor(private service: GodownServiceService,private datePipe: DatePipe) {}
 
   ngOnInit(): void {
-    if (this.form.formControls) {
+    if (this.form && this.form.formControls) {
       let formGroup: any = {};
       this.form.formControls.forEach((controls: IFormControl) => {
         let controlValidators: any = [];
@@ -75,7 +75,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     //const dateObject = new Date('Mon Dec 01 2025 10:00:00 GMT+0530 (India Standard Time)');
 
-    if (changes['godown']) {
+    if (this.form &&  changes['godown']) {
       this.dynamicForGrp.patchValue(this.godown);
       if (this.godown && this.godown.lastUpdated) {
         const startDateObject = new Date(this.godown.lastUpdated);
