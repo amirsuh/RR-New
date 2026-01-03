@@ -7,7 +7,7 @@ export interface GodownDetails{
   currentStock: number;
   inwardStock: number;
   outwardStock: number;
-  lastUpdated?: Date;
+  lastUpdated?: string;
   status: 'active' | 'inactive';
   location?: string;
   contactPerson?: string;

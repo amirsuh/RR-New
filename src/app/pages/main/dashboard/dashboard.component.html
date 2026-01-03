@@ -10,7 +10,14 @@
 
   <!-- Open Modal Button -->
 
-
+<div>
+  <ul class="pagination">
+    @for(godo of godowns$ | async;track godo){
+    <li class="page-item">
+      <a class="page-link" href="#">{{godo.name}}</a></li>
+    }
+  </ul>
+</div>
 
 
   <filter-header [compName]="headingOfPage" (changeEvent)="selectedItem" (changeInput)="getText($event)" [godown]="editGodownData"

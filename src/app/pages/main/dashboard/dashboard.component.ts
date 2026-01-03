@@ -14,6 +14,8 @@ import { FilterHeaderComponent } from '../../shared/filter-header/filter-header.
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { formConfig } from '../../shared/config';
 import { IForm } from '../../../shared/interfaces/dynamic-form/form.interface';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 // import { OnpushDemoComponent } from "../demo/onpush-demo/onpush-demo.component";
 
@@ -34,10 +36,10 @@ export class DashboardComponent {
   sortOptions: any;
   addNewGodown = formConfig as IForm;
   editGodownData!:GodownDetails
-
+  godowns$?:Observable<GodownDetails[]>;
   constructor(
     private godownService: GodownServiceService,
-    private router: Router
+    private router: Router,private store:Store<{goDown:GodownDetails[]}>
   ) {
     this.sortOptions = [
       { id: 0, label: 'Name Ascending', column: 'name', direction: 'asc' },
@@ -65,6 +67,7 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
+
     this.isLoading = true;
     setTimeout(() => {
       this.godownService.getGodowndetails().subscribe(
