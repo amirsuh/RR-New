@@ -80,7 +80,7 @@ export class DashboardComponent {
           this.isLoading = false;
         }
       );
-    }, 1000);
+    }, 500);
   }
 
   // New Lifcycle hooks in 17,18

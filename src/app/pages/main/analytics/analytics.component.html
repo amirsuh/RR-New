@@ -1,65 +1,79 @@
 <div class="container">
-  <!-- <button (click)="processSalesData()">Process Sales Data</button>
 
-  <div *ngIf="loading">Processing…</div>
-
-  <div *ngIf="result">
-    <p>Total Revenue: {{ result.totalRevenue | number:'1.2-2' }}</p>
-
-    <div *ngFor="let cat of result.category | keyvalue">
-      {{ cat.key }}: {{ cat.value }}
-    </div>
-  </div> -->
-  <!-- Banner -->
-  <!-- <div class="banner mb-5">
-      <h1 class="fw-bold">{{headingOfPage}}</h1>
-      <p class="mt-2">Track performance, users, sales, and real-time statistics easily.</p>
-    </div> -->
   <filter-header [compName]="headingOfPage" (changeEvent)="selectedItem"
-    (changeInput)="getText($event)" ></filter-header>
-  <!-- Analytics Cards [addNewGodown]="addNewAnalytics"-->
-  <div class="row g-4">
+    (changeInput)="getText($event)"></filter-header>
 
-    <div class="col-md-4">
-      <div class="analytics-card">
-        <h4 class="fw-bold">Daily Users</h4>
-        <h2 class="mt-3">12,540</h2>
-        <p class="text-white-50">+8% from yesterday</p>
+
+
+
+  <div class="container-fluid">
+
+    <h2 class="mb-4">Warehouse Analytics Dashboard</h2>
+
+    <!-- Cards -->
+    <div class="row g-3 mb-4">
+      @defer (when isChartsInitialized()) {
+      <div class="col-xl col-md-4 col-sm-6" *ngFor="let card of [
+      { label: 'Total Warehouses', value: totalWarehouses },
+      { label: 'Active Warehouses', value: activeWarehouses },
+      { label: 'Total Capacity', value: totalCapacity },
+      { label: 'Total Stock', value: totalStock },
+      { label: 'Utilization', value: utilization + '%' }
+    ]">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <p class="text-muted mb-1">{{ card.label }}</p>
+            <h4>{{ card.value }}</h4>
+          </div>
+        </div>
       </div>
+      }
+      @placeholder {
+      <div class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">isLoading...</span>
+        </div>
+      </div>
+      }
+      @loading (after 100ms; minimum 1s) {
+      <!-- Content displayed while the bundle for the deferred content is being fetched -->
+      <div class="loader">Loading...</div>
+      }
+      @error {
+      <!-- Content displayed if an error occurs during loading -->
+      <p>Oops! Failed to load data.</p>
+      }
+
     </div>
 
-    <div class="col-md-4">
-      <div class="analytics-card">
-        <h4 class="fw-bold">Sales</h4>
-        <h2 class="mt-3">$8,230</h2>
-        <p class="text-white-50">+12% this week</p>
+    <!-- Charts -->
+    <div class="row g-4">
+      <div class="col-lg-8 col-12">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="mb-3">Capacity vs Current Stock</h6>
+            <div class="chart-wrapper">
+              <canvas #capacityChart id="capacityChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-12">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="mb-3 text-center">Warehouse Status</h6>
+            <div class="chart-wrapper">
+              <canvas #statusChart id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="analytics-card">
-        <h4 class="fw-bold">Bounce Rate</h4>
-        <h2 class="mt-3">34%</h2>
-        <p class="text-white-50">-3% better than last week</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="analytics-card">
-        <h4 class="fw-bold">New Signups</h4>
-        <h2 class="mt-3">1,240</h2>
-        <p class="text-white-50">In the last 24 hours</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="analytics-card">
-        <h4 class="fw-bold">Server Uptime</h4>
-        <h2 class="mt-3">99.98%</h2>
-        <p class="text-white-50">Stable</p>
-      </div>
-    </div>
-
+  </div>
+  <div class="charts">
+    <canvas id="capacityChart"></canvas>
+    <canvas id="statusChart"></canvas>
   </div>
 
 </div>
