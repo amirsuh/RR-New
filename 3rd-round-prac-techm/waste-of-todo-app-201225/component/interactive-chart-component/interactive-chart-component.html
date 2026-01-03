@@ -1,0 +1,33 @@
+<div class="chart-container">
+      <canvas #chartCanvas width="400" height="300"></canvas>
+      <div class="chart-controls">
+        <button mat-raised-button (click)="toggleZoom()">Toggle Zoom</button>
+        <button mat-stroked-button (click)="updateData()">Refresh Data</button>
+      </div>
+    </div>
+<!-- @defer (on immediate) {
+  <div class="product-card">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.price }}</p>
+
+    @defer (on hover(reviewsSection); prefetch on idle) {
+      <div #reviewsSection class="reviews">
+        <h4>Customer Reviews</h4>
+
+        @defer (on timer(1.5s)) {
+          <image-gallery [images]="product.images" />
+        } @placeholder {
+          <p>High-res gallery loading soon...</p>
+        } @loading {
+          <div class="image-loader"></div>
+        }
+
+        <review-list [reviews]="product.reviews" />
+      </div>
+    } @placeholder {
+      <button class="reviews-teaser">{{ product.reviewCount }} Reviews</button>
+    }
+  </div>
+} @error {
+  <div class="error">Product failed to load</div>
+} -->

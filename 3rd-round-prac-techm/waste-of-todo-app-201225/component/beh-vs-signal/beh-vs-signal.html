@@ -1,0 +1,67 @@
+<p>beh-vs-signal works!</p>
+<div *ngIf="user$ | async as user">
+  <p>behSubject: {{ user.name }} -- {{ user.email }}</p>
+</div>
+<!-- <p>behSubject: {{user$ | async}}</p> -->
+<p>signal: {{user()?.name}} {{user()?.email}}</p>
+<button (click)="setUser({'name':'name','id':0,'email':'test@gmail'})">set username</button>
+<section *ngIf="vm$ | async as vm">
+  <h2>Account Summary</h2>
+
+  <p><strong>Account Name:</strong> {{ vm.account.name }}</p>
+  <p><strong>Account Number:</strong> {{ vm.account.number }}</p>
+  <p><strong>Balance:</strong> {{ vm.balance | currency }}</p>
+</section>
+
+<hr />
+
+<section *ngIf="settingsVm$ | async as settingsVm">
+  <h3>User Settings</h3>
+  <p>User: {{ settingsVm.u?.name }}</p>
+  <p>Theme: {{ settingsVm.s?.theme }}</p>
+</section>
+
+<hr />
+
+<button
+  [disabled]="!(isCheckoutEnabled$ | async)"
+  class="checkout-btn"
+>
+  Checkout
+</button>
+
+
+<!-- using signal  -->
+ <section>
+  <h2>Account Summary</h2>
+
+  <p><strong>Account Name:</strong> {{ vm().account.name }}</p>
+  <p><strong>Account Number:</strong> {{ vm().account.number }}</p>
+  <p><strong>Balance:</strong> {{ vm().balance | currency }}</p>
+</section>
+
+<hr />
+
+<section>
+  <h3>User Settings</h3>
+  <p>User: {{ settingsVm().u?.name }}</p>
+  <p>Theme: {{ settingsVm().s.theme }}</p>
+</section>
+
+<hr />
+
+<button
+  class="checkout-btn"
+  [disabled]="!isCheckoutEnabled()"
+>
+  Checkout
+</button>
+
+<div>
+  <h6>btos</h6>
+  <!-- @let user = ;
+ @if(user){ -->
+   <p >{{`name is ${userbtos()?.name} an email is this-> ${userbtos()?.email}`}}</p>
+ <!-- } -->
+</div>
+

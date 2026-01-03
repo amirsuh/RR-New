@@ -1,0 +1,11 @@
+<p>api-bind works!</p>
+<ng-content *ngFor="let usr of user$ | async">
+<ul>
+  <li>{{usr.name}}</li>
+</ul>
+
+
+</ng-content>
+<ng-content *ngFor="let usrs of users">
+<p>{{usrs}}</p>
+</ng-content>

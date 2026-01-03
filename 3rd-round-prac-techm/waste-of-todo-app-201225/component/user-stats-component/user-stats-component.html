@@ -1,0 +1,21 @@
+    <mat-card class="stats-grid">
+      <mat-card-header>
+        <mat-card-title>User Statistics</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-item" *ngFor="let stat of stats()">
+          <div class="stat-value">{{ stat.value | number }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-change">
+            <span [class.trend-up]="stat.trend === 'up'"
+                  [class.trend-down]="stat.trend === 'down'">
+              {{ stat.change }}%
+            </span>
+          </div>
+          <mat-progress-bar
+            [value]="stat.value / 1000 * 100"
+            mode="determinate">
+          </mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>

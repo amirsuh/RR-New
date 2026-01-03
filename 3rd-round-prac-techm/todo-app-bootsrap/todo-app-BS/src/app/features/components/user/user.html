@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- Left side: Form -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Add</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" [(ngModel)]="newBatchObj.batchName" class="form-control" name="name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" [(ngModel)]="newBatchObj.createdAt" class="form-control" name="email" required>
+            </div>
+
+                        <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" [(ngModel)]="newBatchObj.description" class="form-control" name="name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" [(ngModel)]="newBatchObj.updatedAt" class="form-control" name="email" required>
+            </div>
+
+                        <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" [(ngModel)]="newBatchObj.startDate" class="form-control" name="name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" [(ngModel)]="newBatchObj.endDate" class="form-control" name="email" required>
+            </div>
+
+                        <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" [(ngModel)]="newBatchObj.isActive" class="form-control" name="name" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Add
+            </button>
+            <button type="button" class="btn btn-secondary ms-2">
+              Clear
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: Table -->
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>test</td>
+            <td>test@ffgg</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2">Edit</button>
+              <button class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-center">No users found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

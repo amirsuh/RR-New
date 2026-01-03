@@ -1,0 +1,5 @@
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stat-item { text-align: center; padding: 1rem; }
+    .stat-value { font-size: 2rem; font-weight: bold; }
+    .stat-change { font-size: 0.9rem; }
+    .trend-up { color: green; } .trend-down { color: red; }

@@ -1,0 +1,31 @@
+<div class="dashboard">
+  @defer (on viewport) {
+    <section #dashboardSection>
+      <h2>Dashboard Overview</h2>
+
+      @defer (on idle) {
+        <div class="widgets">
+          <app-user-stats-component />
+
+          @defer (on interaction(chartBtn); prefetch on hover) {
+            <app-interactive-chart-component />
+          } @placeholder {
+            <button #chartBtn class="load-chart">Load Analytics Chart</button>
+          } @loading (minimum 500ms) {
+            <div class="spinner">Chart loading...</div>
+          } @error {
+            <p>Chart unavailable. <button (click)="retryChart()">Retry</button></p>
+          }
+        </div>
+      } @placeholder {
+        <p>Widgets preparing...</p>
+      }
+    </section>
+  } @placeholder {
+    <div class="dashboard-placeholder">
+      Scroll to load dashboard
+    </div>
+  } @loading {
+    <mat-progress-spinner />
+  }
+</div>
