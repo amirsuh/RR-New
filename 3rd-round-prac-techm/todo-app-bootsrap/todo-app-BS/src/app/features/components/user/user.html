@@ -10,42 +10,46 @@
         <div class="card-body">
           <form>
             <div class="mb-3">
-              <label class="form-label">Name</label>
+              <label name="name" class="form-label">Batch Name</label>
               <input type="text" [(ngModel)]="newBatchObj.batchName" class="form-control" name="name" required>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" [(ngModel)]="newBatchObj.createdAt" class="form-control" name="email" required>
+              <label name="description" class="form-label">Description</label>
+              <textarea rows="3" name="description" id="description" [(ngModel)]="newBatchObj.description"
+                class="form-control" name="name" required></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label name="startDate" class="form-label">Start Date</label>
+                  <input type="date" [(ngModel)]="newBatchObj.startDate" class="form-control" name="startDate" required>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label name="endDate" class="form-label">End Date</label>
+                  <input type="date" [(ngModel)]="newBatchObj.endDate" class="form-control" name="endDate" required>
+                </div>
+              </div>
             </div>
 
-                        <div class="mb-3">
-              <label class="form-label">Name</label>
-              <input type="text" [(ngModel)]="newBatchObj.description" class="form-control" name="name" required>
-            </div>
+
 
             <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" [(ngModel)]="newBatchObj.updatedAt" class="form-control" name="email" required>
+              <label class="form-label">Active Status</label>
+              <div>
+                <span *ngIf="newBatchObj.isActive; else inactiveStatus" class="badge bg-success">Active</span>
+                <ng-template #inactiveStatus>
+                  <span class="badge bg-danger">Inactive</span>
+                </ng-template>
+              </div>
+              <input type="checkbox" [(ngModel)]="newBatchObj.isActive" class="form-check-input" name="email" required>
             </div>
 
-                        <div class="mb-3">
-              <label class="form-label">Name</label>
-              <input type="text" [(ngModel)]="newBatchObj.startDate" class="form-control" name="name" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" [(ngModel)]="newBatchObj.endDate" class="form-control" name="email" required>
-            </div>
-
-                        <div class="mb-3">
-              <label class="form-label">Name</label>
-              <input type="text" [(ngModel)]="newBatchObj.isActive" class="form-control" name="name" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-              Add
+            <button type="submit" (click)="onSaveBatch()" class="btn btn-primary">
+              Create Batch
             </button>
             <button type="button" class="btn btn-secondary ms-2">
               Clear
@@ -60,23 +64,34 @@
       <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
+            <th>Start date</th>
+            <th>End Date</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
+          @for(item of batchList();track $index){
           <tr>
-            <td>1</td>
-            <td>test</td>
-            <td>test@ffgg</td>
+            <td><strong>{{$index}}</strong></td>
+            <td>{{item.batchName}}</td>
+            <td>{{item.startDate | date:'dd-MM-yy'}}</td>
+            <td>{{item.endDate | date:'dd-MM-yy'}}</td>
+            <td>
+              <span class="badge-status" [ngClass]="item.isActive ? ' badge-active':' badge-inactive'">
+                <i class="fas fa-check-circle me-1">Active</i>
+              </span>
+            </td>
             <td>
               <button class="btn btn-warning btn-sm me-2">Edit</button>
               <button class="btn btn-danger btn-sm">Delete</button>
             </td>
           </tr>
-          <tr>
+          }
+
+          <tr *ngIf="batchList().length==0">
             <td colspan="4" class="text-center">No users found</td>
           </tr>
         </tbody>

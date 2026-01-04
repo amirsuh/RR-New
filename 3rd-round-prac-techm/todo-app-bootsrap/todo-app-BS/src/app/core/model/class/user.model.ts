@@ -5,8 +5,8 @@ export class BatchModel {
   startDate: string
   endDate: string
   isActive: boolean
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
 
   constructor() {
     this.batchId = 0
@@ -15,7 +15,7 @@ export class BatchModel {
     this.startDate = ''
     this.endDate = ''
     this.isActive = false
-    this.createdAt = ''
-    this.updatedAt = ''
+    this.createdAt = new Date
+    this.updatedAt = new Date
   }
 }
